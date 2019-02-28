@@ -1,0 +1,161 @@
+﻿1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+<html>
+<head>
+    <title>Google Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+        #map {
+            height: 300px;
+            width: 600px;
+        }
+    </style>
+</head>
+<body>
+    <div style="padding:10px">
+        <div id="map"></div>
+    </div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDoxZh__aGy-oGtIvRH1rH0QT0jMYfr9Ro"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+    <!--<script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyBLDLyWOCMBiYRoc3QDMRVb3Cpm417hOHQ",
+      authDomain: "geolocationprova.firebaseapp.com",
+      databaseURL: "https://geolocationprova.firebaseio.com",
+      projectId: "geolocationprova",
+      storageBucket: "geolocationprova.appspot.com",
+      messagingSenderId: "235446838811"
+      };
+      firebase.initializeApp(config);
+      </script>-->
+
+    <script type="text/javascript">
+        var config = {
+            apiKey: "AIzaSyBLDLyWOCMBiYRoc3QDMRVb3Cpm417hOHQ",
+            authDomain: "geolocationprova.firebaseapp.com",
+            databaseURL: "https://geolocationprova.firebaseio.com",
+            projectId: "geolocationprova",
+            storageBucket: "geolocationprova.appspot.com",
+            messagingSenderId: "235446838811"
+        };
+        firebase.initializeApp(config);
+
+        var latitude;
+        var longitude;
+       
+     
+          
+            var Latlngcenter = new google.maps.LatLng(40.328, 18.819);
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: Latlngcenter,
+            zoom: 4
+        });
+        // var map;
+        var myRef = firebase.database();
+        var geoRef = myRef.ref('geolocationprova');
+        var markersArray = [];
+        geoRef.on('child_changed', function (snapshot) {
+            debugger;
+            data = snapshot.val();
+            var e = data.lat;
+            //update te gjithe marker
+            snapshot.forEach(function (item) {
+                debugger;
+                d = snapshot.val();
+
+                latitude = d.lat;
+                longitude = d.longt;
+                var myLatLng = { lat: latitude, lng: longitude };
+                var marker = new google.maps.Marker({
+                    position: myLatLng,
+                    map: map,
+                    //title: 'Hello World'
+
+                    // setting latitude & longitude as title of the marker
+                    // title is shown when you hover over the marker
+                    title: latitude + ', ' + longitude,
+                    label: { fontSize: '10px', text: 'Andi' }
+                });
+                marker.setMap(map);
+                markersArray.push(marker);
+            });
+
+        });
+        //initMap();
+        function initMap() {
+            //var latitude = 41.3270493; // YOUR LATITUDE VALUE
+            //var longitude = 19.8038101; // YOUR LONGITUDE VALUE
+
+            //var myLatLng = {lat: latitude, lng: longitude};
+
+            //map = new google.maps.Map(document.getElementById('map'), {
+            //  //center: myLatLng,
+            //  zoom: 15
+            //});
+
+            //var marker = new google.maps.Marker({
+            //  position: myLatLng,
+            //  map: map,
+            //  //title: 'Hello World'
+
+            //  // setting latitude & longitude as title of the marker
+            //  // title is shown when you hover over the marker
+            //  title: latitude + ', ' + longitude,
+            //  label: { fontSize: '10px', text: 'Andi' },
+            //});
+        }
+    </script>
+
+
+    <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDoxZh__aGy-oGtIvRH1rH0QT0jMYfr9Ro&callback=initMap"
+            async defer></script>-->
+</body>
+</html>
+

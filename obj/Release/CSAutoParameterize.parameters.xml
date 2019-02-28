@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="DataBase-Web.config Connection String" description="DataBase Connection String used in web.config by the application to access the database." defaultValue="server = 79.106.9.195, 23395;Network Library = DBMSSOCN;database=Adexfoto;uid = adexsa; pwd = QAZwsx@131;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Andi\\Desktop\\AdexDispecher\\FotoRealTime\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DataBase']/@connectionString" />
+  </parameter>
+</parameters>
